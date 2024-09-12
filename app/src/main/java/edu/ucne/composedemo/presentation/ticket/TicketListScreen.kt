@@ -1,4 +1,4 @@
-package edu.ucne.composedemo.presentation.Ticket
+package edu.ucne.composedemo.presentation.ticket
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -71,8 +70,7 @@ fun TicketListBodyScreen(
                 items(uiState.tickets) {
                     TicketRow(
                         it,
-                        goToTicket,
-                        createTicket
+                        goToTicket
                     )
                 }
             }
@@ -82,9 +80,7 @@ fun TicketListBodyScreen(
 @Composable
 private fun TicketRow(
     it: TicketEntity,
-    goToTicket: (Int) -> Unit,
-    createTicket: () -> Unit
-) {
+    goToTicket: (Int) -> Unit, ) {
 
         Column(
             modifier = Modifier
@@ -107,5 +103,4 @@ private fun TicketRow(
             }
         }
         HorizontalDivider()
-
 }

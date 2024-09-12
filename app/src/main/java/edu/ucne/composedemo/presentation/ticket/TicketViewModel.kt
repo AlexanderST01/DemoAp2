@@ -1,8 +1,7 @@
-package edu.ucne.composedemo.presentation.Ticket
+package edu.ucne.composedemo.presentation.ticket
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.PrimaryKey
 import dagger.hilt.android.lifecycle.HiltViewModel
 import edu.ucne.composedemo.data.local.entities.TicketEntity
 import edu.ucne.composedemo.data.repository.TicketRepository

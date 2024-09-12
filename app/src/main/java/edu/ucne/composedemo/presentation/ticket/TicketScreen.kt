@@ -1,4 +1,4 @@
-package edu.ucne.composedemo.presentation.Ticket
+package edu.ucne.composedemo.presentation.ticket
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +20,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -36,11 +37,14 @@ fun TicketScreen(
     goBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(key1 = ticketId) {
+        viewModel.selectedTicket(ticketId)
+    }
     TicketBodyScreen(
         uiState = uiState,
         onClienteChange = viewModel::onClienteChange,
         onAsuntoChange = viewModel::onAsuntoChange,
-        onTicketIdChange = viewModel::onTicketIdChange,
         saveTicket = viewModel::save,
         deleteTicket = viewModel::delete,
         nuevoTicket = viewModel::nuevo,
@@ -54,7 +58,6 @@ fun TicketBodyScreen(
     uiState: UiState,
     onClienteChange: (String) -> Unit,
     onAsuntoChange: (String) -> Unit,
-    onTicketIdChange: (Int) -> Unit,
     saveTicket: () -> Unit,
     deleteTicket: () -> Unit,
     nuevoTicket: () -> Unit,
@@ -123,7 +126,6 @@ fun TicketBodyScreen(
                             )
                             Text(text = "Nuevo")
                         }
-                        val scope = rememberCoroutineScope()
                         OutlinedButton(
 
                             onClick = {
@@ -137,10 +139,21 @@ fun TicketBodyScreen(
                             )
                             Text(text = "Guardar")
                         }
+                        OutlinedButton(
+                            onClick = {
+                                deleteTicket()
+                                goBack()
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = "save button"
+                            )
+                            Text(text = "Eliminar")
+                        }
                     }
                 }
             }
-//            TicketListScreen(uiState.tickets,)
         }
     }
 }
